@@ -1,0 +1,30 @@
+<div
+  class="table"
+  role="table"
+  [style.--table-cols]="columns.length"
+>
+  <div class="table__header" role="rowgroup">
+    <div class="table__row table__row--header" role="row">
+      @for (col of columns; track col.key) {
+        <div class="table__cell table__cell--header" role="columnheader">
+          {{ col.label }}
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="table__body" role="rowgroup">
+    @for (row of data; track $index) {
+      <div class="table__row" role="row">
+        @for (col of columns; track col.key) {
+          <div class="table__cell" role="cell">
+            <span class="table__cell-label" aria-hidden="true">{{ col.label }}</span>
+            <span class="table__cell-value">{{ row[col.key] }}</span>
+          </div>
+        }
+      </div>
+    } @empty {
+      <div class="table__empty">No data available.</div>
+    }
+  </div>
+</div>

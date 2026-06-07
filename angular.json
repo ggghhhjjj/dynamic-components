@@ -1,0 +1,150 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "packageManager": "npm"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "ui-card": {
+      "projectType": "library",
+      "root": "projects/ui-card",
+      "sourceRoot": "projects/ui-card/src",
+      "prefix": "ui",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui-card/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ui-card/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ui-card/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "ui-table": {
+      "projectType": "library",
+      "root": "projects/ui-table",
+      "sourceRoot": "projects/ui-table/src",
+      "prefix": "ui",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui-table/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ui-table/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ui-table/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "elements-host": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": true,
+          "style": "scss"
+        }
+      },
+      "root": "projects/elements-host",
+      "sourceRoot": "projects/elements-host/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/elements-host/src/main.ts",
+            "tsConfig": "projects/elements-host/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/elements-host/public"
+              }
+            ],
+            "styles": [
+              "projects/elements-host/src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "none",
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "elements-host:build:production"
+            },
+            "development": {
+              "buildTarget": "elements-host:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test"
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/elements-host/.storybook",
+            "browserTarget": "elements-host:build",
+            "compodoc": false,
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/elements-host/.storybook",
+            "browserTarget": "elements-host:build",
+            "compodoc": false,
+            "outputDir": "dist/storybook"
+          }
+        }
+      }
+    }
+  }
+}

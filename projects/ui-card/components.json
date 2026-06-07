@@ -1,0 +1,11 @@
+{
+  "name": "ui-card",
+  "components": [
+    {
+      "component": "UiCard",
+      "export": "UiCard",
+      "tag": "ui-card",
+      "description": "Flexible container component for displaying content"
+    }
+  ]
+}

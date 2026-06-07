@@ -1,0 +1,11 @@
+{
+  "name": "ui-table",
+  "components": [
+    {
+      "component": "UiTable",
+      "export": "UiTable",
+      "tag": "ui-table",
+      "description": "Data table component for displaying structured information"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Block: .table
+// Elements: .table__header  .table__body  .table__row  .table__cell
+//           .table__cell-label  .table__cell-value  .table__empty
+// Modifiers: .table__row--header  .table__cell--header
+// ─────────────────────────────────────────────────────────────────────────────
+
+.table {
+  // --table-cols is set dynamically via [style.--table-cols]="columns.length"
+  --table-cols: 1;
+
+  border: 1px solid var(--table-border, #e2e8f0);
+  border-radius: var(--table-radius, 0.5rem);
+  overflow: hidden;
+  font-size: var(--table-font-size, 0.9375rem);
+
+  // ── Element: row ──────────────────────────────────────────────────────────
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(var(--table-cols), 1fr);
+
+    &--header {
+      background-color: var(--table-header-bg, #f8fafc);
+    }
+  }
+
+  // ── Element: cell ─────────────────────────────────────────────────────────
+  &__cell {
+    padding: var(--table-cell-padding, 0.75rem 1rem);
+    border-bottom: 1px solid var(--table-border, #e2e8f0);
+    border-right: 1px solid var(--table-border, #e2e8f0);
+    color: var(--table-cell-color, #334155);
+    word-break: break-word;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    &--header {
+      font-weight: 600;
+      color: var(--table-header-color, #0f172a);
+    }
+  }
+
+  // ── Element: cell label (key shown only on mobile) ────────────────────────
+  &__cell-label {
+    display: none;
+  }
+
+  // ── Element: body — remove bottom border from the last data row ───────────
+  &__body {
+    .table__row:last-child .table__cell {
+      border-bottom: none;
+    }
+  }
+
+  // ── Element: empty state ──────────────────────────────────────────────────
+  &__empty {
+    padding: var(--table-cell-padding, 0.75rem 1rem);
+    color: var(--table-cell-color, #334155);
+    text-align: center;
+  }
+}
+
+// ── Responsive: mobile (≤ 480px) — one vertical key-value card per row ───────
+@media (max-width: 480px) {
+  .table {
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  // Header row is hidden — labels are shown inline inside each cell instead
+  .table__header {
+    display: none;
+  }
+
+  // Each data row becomes a bordered card
+  .table__body .table__row {
+    display: block;
+    border: 1px solid var(--table-border, #e2e8f0);
+    border-radius: var(--table-radius, 0.5rem);
+    overflow: hidden;
+  }
+
+  // Each cell displays as a two-column key-value pair
+  .table__cell {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.5rem;
+    border-right: none;
+    align-items: baseline;
+  }
+
+  // Reset the desktop "last-row no border" rule — every row is its own card
+  .table__body .table__row:last-child .table__cell {
+    border-bottom: 1px solid var(--table-border, #e2e8f0);
+  }
+
+  // Last cell in each card has no bottom border (flush with card edge)
+  .table__body .table__row .table__cell:last-child {
+    border-bottom: none;
+  }
+
+  // Show the column label as the key
+  .table__cell-label {
+    display: block;
+    font-weight: 600;
+    color: var(--table-header-color, #0f172a);
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "ui-foo",
+  "components": [
+    {
+      "component": "UiFoo",
+      "export": "UiFoo",
+      "tag": "ui-foo",
+      "description": "Short description of the component"
+    }
+  ]
+}

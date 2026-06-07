@@ -1,0 +1,57 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve",
+    "paths": {
+      "ui-card": [
+        "./dist/ui-card"
+      ],
+      "ui-table": [
+        "./dist/ui-table"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "files": [],
+  "include": [
+    "projects/elements-host/.storybook/**/*.ts",
+    "projects/*/src/stories/**/*.ts"
+  ],
+  "references": [
+    {
+      "path": "./projects/ui-card/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ui-card/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ui-table/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ui-table/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/elements-host/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/elements-host/tsconfig.spec.json"
+    }
+  ]
+}
