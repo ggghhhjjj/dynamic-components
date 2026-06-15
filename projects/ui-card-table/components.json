@@ -1,0 +1,11 @@
+{
+  "name": "ui-card-table",
+  "components": [
+    {
+      "component": "UiCardTable",
+      "export": "UiCardTable",
+      "tag": "ui-card-table",
+      "description": "Responsive native table that becomes key-value cards on mobile via data-label"
+    }
+  ]
+}

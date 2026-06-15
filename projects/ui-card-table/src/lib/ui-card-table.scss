@@ -1,0 +1,93 @@
+// Native <table> that collapses into stacked cards on narrow viewports.
+// Mobile labels are injected via td[data-label] + ::before { content: attr(data-label) }.
+
+.card-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--card-table-font-size, 0.9375rem);
+  color: var(--card-table-color, #334155);
+
+  th,
+  td {
+    padding: var(--card-table-cell-padding, 0.75rem 1rem);
+    border: 1px solid var(--card-table-border, #e2e8f0);
+    text-align: left;
+  }
+
+  thead th {
+    background-color: var(--card-table-header-bg, #f8fafc);
+    font-weight: 600;
+    color: var(--card-table-header-color, #0f172a);
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: var(--card-table-stripe-bg, #fafbfc);
+  }
+
+  &__empty {
+    text-align: center;
+    color: var(--card-table-muted-color, #64748b);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card-table {
+    thead {
+      display: none;
+    }
+
+    &,
+    tbody {
+      display: block;
+      width: 100%;
+    }
+
+    tbody tr {
+      display: block;
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 6px;
+      background: var(--card-table-card-bg, #fff);
+      box-shadow: var(--card-table-card-shadow, 0 2px 5px rgba(0, 0, 0, 0.15));
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--card-table-card-bg, #fff);
+    }
+
+    td {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 8px 5px;
+      border: none;
+      border-bottom: 1px solid var(--card-table-divider, #eee);
+      text-align: right;
+
+      &::before {
+        content: attr(data-label);
+        font-weight: 700;
+        text-align: left;
+        color: var(--card-table-label-color, #333);
+        flex-shrink: 0;
+      }
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    &__empty {
+      display: block;
+      text-align: center;
+      border: 1px solid var(--card-table-border, #e2e8f0);
+      border-radius: 6px;
+      box-shadow: none;
+
+      &::before {
+        content: none;
+      }
+    }
+  }
+}

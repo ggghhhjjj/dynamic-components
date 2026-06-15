@@ -145,6 +145,32 @@
           }
         }
       }
+    },
+    "ui-card-table": {
+      "projectType": "library",
+      "root": "projects/ui-card-table",
+      "sourceRoot": "projects/ui-card-table/src",
+      "prefix": "ui",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui-card-table/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ui-card-table/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ui-card-table/tsconfig.spec.json"
+          }
+        }
+      }
     }
   }
 }

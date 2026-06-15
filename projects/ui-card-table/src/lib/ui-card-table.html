@@ -1,0 +1,24 @@
+<table class="card-table">
+  <thead>
+    <tr>
+      @for (col of columns; track col.key) {
+        <th scope="col">{{ col.label }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of data; track $index) {
+      <tr>
+        @for (col of columns; track col.key) {
+          <td [attr.data-label]="col.label">{{ row[col.key] }}</td>
+        }
+      </tr>
+    } @empty {
+      <tr>
+        <td class="card-table__empty" [attr.colspan]="columns.length || 1">
+          No data available.
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

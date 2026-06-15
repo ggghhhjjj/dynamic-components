@@ -13,7 +13,8 @@
 
     "build:ui-card": "ng build ui-card",
     "build:ui-table": "ng build ui-table",
-    "build:libs": "npm run build:ui-card && npm run build:ui-table",
+    "build:ui-card-table": "ng build ui-card-table",
+    "build:libs": "npm run build:ui-card && npm run build:ui-table && npm run build:ui-card-table",
 
     "storybook": "ng run elements-host:storybook",
     "build:storybook": "ng run elements-host:build-storybook",
