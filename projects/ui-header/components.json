@@ -1,0 +1,11 @@
+{
+  "name": "ui-header",
+  "components": [
+    {
+      "component": "UiHeader",
+      "export": "UiHeader",
+      "tag": "ui-header",
+      "description": "Fixed top navigation bar with menu, language switcher, status slot, and scrollable tabs"
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+<header class="header">
+  <div class="header__chrome">
+    <div class="header__menu" (click)="$event.stopPropagation()">
+      <button
+        class="header__icon-btn"
+        type="button"
+        (click)="toggleMenu($event)"
+        aria-haspopup="menu"
+        [attr.aria-expanded]="menuOpen()"
+        [attr.aria-label]="menuLabel"
+      >
+        <svg class="header__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="6" r="1.5" fill="currentColor" />
+          <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+          <circle cx="12" cy="18" r="1.5" fill="currentColor" />
+        </svg>
+      </button>
+      @if (menuOpen()) {
+        <ul class="header__menu-list" role="menu">
+          @for (item of menuItems; track item.id) {
+            <li role="none">
+              <button
+                class="header__menu-item"
+                type="button"
+                role="menuitem"
+                [disabled]="item.disabled"
+                (click)="onMenuItemClick(item.id)"
+              >
+                {{ item.label }}
+              </button>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+
+    @if (languages.length > 0) {
+      <div class="header__lang" (click)="$event.stopPropagation()">
+        <button
+          class="header__lang-btn"
+          type="button"
+          (click)="toggleLang($event)"
+          aria-haspopup="listbox"
+          [attr.aria-expanded]="langOpen()"
+          [attr.aria-label]="languageLabel"
+        >
+          {{ activeLanguageDisplay() }}
+        </button>
+        @if (langOpen()) {
+          <ul class="header__lang-list" role="listbox">
+            @for (lang of languages; track lang.code) {
+              <li role="none">
+                <button
+                  class="header__lang-item"
+                  [class.header__lang-item--active]="lang.code === activeLanguage"
+                  type="button"
+                  role="option"
+                  [attr.aria-selected]="lang.code === activeLanguage"
+                  (click)="onLanguageItemClick(lang.code)"
+                >
+                  {{ lang.label ?? lang.code }}
+                </button>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    }
+
+    <button
+      class="header__icon-btn header__share"
+      type="button"
+      (click)="onShareClick()"
+      [attr.aria-label]="shareLabel"
+    >
+      @if (shareCopied()) {
+        <svg class="header__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M5 12l5 5L20 7"
+          />
+        </svg>
+      } @else {
+        <svg class="header__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 12v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6M16 6l-4-4-4 4M12 2v13"
+          />
+        </svg>
+      }
+    </button>
+    <span class="header__live" aria-live="polite">
+      @if (shareCopied()) {
+        {{ shareCopiedLabel }}
+      }
+    </span>
+
+    <div
+      class="header__status"
+      role="status"
+      [attr.aria-label]="statusLabel"
+      aria-live="polite"
+    >
+      @if (statusDisplay().spinner) {
+        <svg class="header__status-spinner" viewBox="0 0 24 24" aria-hidden="true">
+          <circle
+            class="header__status-spinner-track"
+            cx="12"
+            cy="12"
+            r="9"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            opacity="0.25"
+          />
+          <path
+            class="header__status-spinner-arc"
+            d="M12 3a9 9 0 0 1 9 9"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      }
+      @if (statusDisplay().prefixText) {
+        <span class="header__status-prefix">{{ statusDisplay().prefixText }}</span>
+        @if (statusDisplay().showSeparator) {
+          <span class="header__status-sep" aria-hidden="true">·</span>
+        }
+      }
+      <span class="header__status-text">{{ statusDisplay().text }}</span>
+    </div>
+  </div>
+
+  <div
+    #tabStrip
+    class="header__tabs"
+    role="tablist"
+    [class.header__tabs--overflow-start]="overflowStart()"
+    [class.header__tabs--overflow-end]="overflowEnd()"
+    (wheel)="onTabWheel($event)"
+  >
+    @for (tab of tabs; track tab.id; let index = $index) {
+      <button
+        #tabButton
+        class="header__tab"
+        [class.header__tab--selected]="tab.id === selectedTabId"
+        type="button"
+        role="tab"
+        [attr.aria-selected]="tab.id === selectedTabId"
+        [attr.tabindex]="tab.id === selectedTabId ? 0 : -1"
+        (click)="onTabClick(tab.id)"
+        (keydown)="onTabKeydown($event, index)"
+      >
+        {{ tab.label }}
+      </button>
+    }
+  </div>
+</header>

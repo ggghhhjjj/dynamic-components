@@ -21,6 +21,9 @@
       "ui-card-table": [
         "./dist/ui-card-table"
       ],
+      "ui-header": [
+        "./dist/ui-header"
+      ],
       "ui-table": [
         "./dist/ui-table"
       ]
@@ -61,6 +64,12 @@
     },
     {
       "path": "./projects/ui-card-table/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ui-header/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ui-header/tsconfig.spec.json"
     }
   ]
 }
